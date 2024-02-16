@@ -23,11 +23,8 @@ $mysqli->query($query);
 $queryTruncateTable = "TRUNCATE TABLE `order`";
 $mysqli->query($queryTruncateTable);
 
-
-$inputFileType = 'Xlsx';
 $fileName = '18. Nike 2024 зима-весна.xlsx';
 $inputFileName = __DIR__ . './upload/' . $fileName;
-$columns = ['A', 'C', 'AL'];
 
 $excel = Excel::open($inputFileName);
 // Читаем все значения как плоский массив с текущего листа

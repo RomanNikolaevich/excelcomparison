@@ -18,6 +18,9 @@ require_once __DIR__ . '/vendor/autoload.php';
     <li>
         <a href="order.php">Внести заказ в базу данных</a>
     </li>
+    <li>
+        <a href="supplier.php">Внести данные от поставщика</a>
+    </li>
 </ul>
 </body>
 </html>
