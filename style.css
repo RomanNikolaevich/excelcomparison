@@ -2,4 +2,56 @@ html,
 body {
     margin: 0;
     font-family: Arial, sans-serif;
+    color: #4CAF50;
+}
+
+a {
+    text-decoration: none;
+}
+
+table {
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+}
+
+/* Стили для кнопки выбора файла */
+.upload-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Стили для input[type="file"] */
+.file-input {
+    display: none; /* Скрыть input[type="file"] */
+}
+
+/* Стили для кнопки загрузки файла */
+.submit-btn {
+    background-color: #008CBA;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 20px;
+}
+
+.warning-text {
+    color: red;
+    font-size: 14px;
+}
+
+.warning-text.last {
+    display: block;
+    margin-top: 14px;
 }

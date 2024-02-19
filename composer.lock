@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "55e09de9eeab4d07fd8f9cd8a0c0cf9e",
+    "content-hash": "5850f778474b7a4968d6432de09563b8",
     "packages": [
         {
             "name": "avadim/fast-excel-helper",
@@ -117,69 +117,6 @@
                 "source": "https://github.com/aVadim483/fast-excel-reader/tree/v2.14.0"
             },
             "time": "2023-12-07T15:42:43+00:00"
-        },
-        {
-            "name": "avadim/fast-excel-writer",
-            "version": "v4.11.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/aVadim483/fast-excel-writer.git",
-                "reference": "84115e7a5b8a1927e0298ce89fb1fdd923914980"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/aVadim483/fast-excel-writer/zipball/84115e7a5b8a1927e0298ce89fb1fdd923914980",
-                "reference": "84115e7a5b8a1927e0298ce89fb1fdd923914980",
-                "shasum": ""
-            },
-            "require": {
-                "avadim/fast-excel-helper": "^1.0",
-                "ext-intl": "*",
-                "ext-json": "*",
-                "ext-mbstring": "*",
-                "ext-zip": "*",
-                "php": ">=7.4"
-            },
-            "require-dev": {
-                "avadim/fast-excel-reader": "^2.11",
-                "ext-fileinfo": "*",
-                "phpunit/phpunit": "^9.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "avadim\\FastExcelWriter\\": "./src/FastExcelWriter"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Lightweight and very fast XLSX Excel Spreadsheet Writer in PHP",
-            "homepage": "https://github.com/aVadim483/fast-excel-writer",
-            "keywords": [
-                "MS Office",
-                "PHPExcel",
-                "excel",
-                "export",
-                "library",
-                "office 2007",
-                "php",
-                "spreadsheet",
-                "xls",
-                "xlsx"
-            ],
-            "support": {
-                "issues": "https://github.com/aVadim483/fast-excel-writer/issues",
-                "source": "https://github.com/aVadim483/fast-excel-writer/tree/v4.11.0"
-            },
-            "funding": [
-                {
-                    "url": "https://www.paypal.me/VShemarov",
-                    "type": "other"
-                }
-            ],
-            "time": "2023-12-23T21:54:47+00:00"
         },
         {
             "name": "maennchen/zipstream-php",
@@ -1136,58 +1073,6 @@
                 }
             ],
             "time": "2024-01-29T20:11:03+00:00"
-        },
-        {
-            "name": "symfony/stopwatch",
-            "version": "v3.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/stopwatch.git",
-                "reference": "52510fe1aefdc1c5d2076ac6030421d387e689d1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/52510fe1aefdc1c5d2076ac6030421d387e689d1",
-                "reference": "52510fe1aefdc1c5d2076ac6030421d387e689d1",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.5.9|>=7.0.8"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.4-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Stopwatch\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony Stopwatch Component",
-            "homepage": "https://symfony.com",
-            "support": {
-                "source": "https://github.com/symfony/stopwatch/tree/3.4"
-            },
-            "time": "2017-11-07T14:28:09+00:00"
         },
         {
             "name": "voku/anti-xss",

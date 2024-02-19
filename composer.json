@@ -6,9 +6,7 @@
   "require": {
     "php": "^8.0",
     "phpoffice/phpspreadsheet": "^2.0",
-    "symfony/stopwatch": "3.4",
-    "avadim/fast-excel-reader": "^2.14",
-    "avadim/fast-excel-writer": "^4.11"
+    "avadim/fast-excel-reader": "^2.14"
   },
   "autoload": {
     "psr-4": {

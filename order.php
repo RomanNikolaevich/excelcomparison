@@ -17,50 +17,84 @@ $query = "CREATE TABLE IF NOT EXISTS `order` (
     `article` VARCHAR(255),
     `price` VARCHAR(255)
 )";
+
 $mysqli->query($query);
 
-// Очистка таблицы "order" от старых данных
-$queryTruncateTable = "TRUNCATE TABLE `order`";
-$mysqli->query($queryTruncateTable);
+$fileName = $_FILES["orderUpload"]["name"];
+$tmpName = $_FILES["orderUpload"]["tmp_name"];
+$uploadPath = __DIR__ . '/upload/' . $fileName;
 
-$fileName = '18. Nike 2024 зима-весна.xlsx';
-$inputFileName = __DIR__ . './upload/' . $fileName;
-
-$excel = Excel::open($inputFileName);
-// Читаем все значения как плоский массив с текущего листа
-$result = $excel->readRows();
-
-// Определение границ цикла
-$totalRows = count($result);
-
-$firstRowWithData = 4;
-
-// Перебор массива строк с учетом проверки наличия ключа и использованием подготовленного запроса
-for ($i = $firstRowWithData; $i <= $totalRows; $i++) {
-    $rowData = $result[$i];
-
-    $line = $i; // номер строки
-    $size = isset($rowData['A']) ? $mysqli->real_escape_string($rowData['A']) : null;
-    $article = isset($rowData['C']) ? $mysqli->real_escape_string($rowData['C']) : null;
-    $price = isset($rowData['AL']) ? $mysqli->real_escape_string($rowData['AL']) : null;
-
-    // Подготовка SQL-запроса с использованием подготовленных запросов
-    $query = "INSERT INTO `order`(`line`, `size`, `article`, `price`) VALUES (?, ?, ?, ?)";
-    $statement = $mysqli->prepare($query);
-
-    // Привязка параметров к значениям данных
-    $statement->bind_param("isss", $line, $size, $article, $price);
-
-    // Выполнение запроса
-    $statement->execute();
-
-    // Закрытие запроса
-    $statement->close();
+// Проверяем, был ли файл загружен
+if (!isset($fileName) || !file_exists($uploadPath)) {
+    echo "Ошибка загрузки файла.";
 }
 
-// Вывод сообщения об успешном завершении операции
-echo "Данные успешно загружены в базу данных.<br>";
-?>
+// Перемещаем файл в папку upload
+move_uploaded_file($tmpName, $uploadPath);
 
-<a href="index.php">Вернуться на главную</a>
+// Очистка таблицы "order" от старых данных
+try {
+    $queryTruncateTable = "TRUNCATE TABLE `order`";
+    if ($mysqli->query($queryTruncateTable)) {
+        echo "Таблица 'order' успешно очищена от старых данных.<br>";
+    } else {
+        throw new Exception("Ошибка при очистке таблицы 'order': " . $mysqli->error);
+    }
+} catch (Exception $e) {
+    echo "Ошибка: " . $e->getMessage();
+}
+
+// Загрузка данных из файла
+$excel = Excel::open($uploadPath);
+$result = $excel->readRows();
+$totalRows = count($result);
+$firstRowWithData = 4;
+
+try {
+    for ($i = $firstRowWithData; $i <= $totalRows; $i++) {
+        $rowData = $result[$i];
+        $line = $i;
+        $size = isset($rowData['A']) ? $mysqli->real_escape_string($rowData['A']) : null;
+        $article = isset($rowData['C']) ? $mysqli->real_escape_string($rowData['C']) : null;
+        $price = isset($rowData['AL']) ? $mysqli->real_escape_string($rowData['AL']) : null;
+
+        $query = "INSERT INTO `order`(`line`, `size`, `article`, `price`) VALUES (?, ?, ?, ?)";
+        $statement = $mysqli->prepare($query);
+        $statement->bind_param("isss", $line, $size, $article, $price);
+        $statement->execute();
+        $statement->close();
+    }
+
+    // Вывод сообщения об успешном завершении операции
+    echo "Данные из файла <b>$fileName</b> успешно загружены в базу данных.<br>";
+
+    // Получение номера строки с первой записью в таблице `order`
+    $firstLineQuery = "SELECT MIN(`line`) AS first_line FROM `order`";
+    $firstLineResult = $mysqli->query($firstLineQuery);
+    $firstLine = $firstLineResult->fetch_assoc()['first_line'];
+
+    // Получение номера строки с последней записью в таблице `order`
+    $lastLineQuery = "SELECT MAX(`line`) AS last_line FROM `order`";
+    $lastLineResult = $mysqli->query($lastLineQuery);
+    $lastLine = $lastLineResult->fetch_assoc()['last_line'];
+
+    // Получение количества записей в таблице `order`
+    $countQuery = "SELECT COUNT(*) AS count FROM `order`";
+    $countResult = $mysqli->query($countQuery);
+    $count = $countResult->fetch_assoc()['count'];
+
+    echo "Начало выборки со строки <b>№ $firstLine</b> по строку <b>№ $lastLine</b>.<br>
+        Количество записей: <b>$count</b> <br>";
+} catch (Exception $e) {
+    echo "Ошибка: " . $e->getMessage();
+}
+
+
+?>
+<ul>
+    <li>
+        <a href="index.php">Вернуться на главную</a>
+    </li>
+</ul>
+
 
